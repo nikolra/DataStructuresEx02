@@ -1,6 +1,6 @@
 #include "MaxHeap.h"
 
-void MaxHeap::FixHeap(int node)
+void MaxHeap::FixHeap(int node, Heap& otherHeap)
 {
     int max;
     int left = Left(node);
@@ -16,8 +16,8 @@ void MaxHeap::FixHeap(int node)
 
     if(max != node)
     {
-        Swap(data[node], data[max]);
-        FixHeap(max);
+        Swap(node, max, otherHeap);
+        FixHeap(max, otherHeap);
     }
 }
 
@@ -26,18 +26,18 @@ Pair MaxHeap::Max()
     return data[0];
 }
 
-Pair MaxHeap::DeleteMax()
+Pair MaxHeap::DeleteMax(Heap& otherHeap)
 {
     if(heapSize < 1)
         throw new HeapException("no nodes in the heap");
     Pair max = data[0];
     heapSize--;
     data[0] = data[heapSize];
-    FixHeap(0);
+    FixHeap(0, otherHeap);
     return max;
 }
 
-void MaxHeap::Insert(Pair item)
+int MaxHeap::Insert(Pair item)
 {
     if(heapSize == maxSize)
         throw new HeapException("no more space in the heap");
@@ -50,16 +50,18 @@ void MaxHeap::Insert(Pair item)
     }
 
     data[i] = item;
+
+    return i;
 }
 
-void MaxHeap::FixHeapUp(int node)
+void MaxHeap::FixHeapUp(int node, Heap& otherHeap)
 {//I am bigger than my parent
 
     int parent = Parent(node);
 
     while(node != 0 && data[node].getPriority() > data [parent].getPriority())
     {
-        Swap(data[node], data[parent]);
+        Swap(node, parent, otherHeap);
         node = parent;
         parent = Parent(node);
     }

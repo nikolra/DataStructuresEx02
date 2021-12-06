@@ -26,44 +26,55 @@ void MinMaxMedianHeap::Insert(int priority, string value)
     size++;
     if( priority > minValuesMaxHeap.Max().getPriority())
     {
-        maxValuesMaxHeap.Insert(Pair(priority, value));
-        maxValuesMinHeap.Insert(Pair(priority, value));
+        int indexMaxHeap = maxValuesMaxHeap.Insert(Pair(priority, value));
+        int indexMinHeap = maxValuesMinHeap.Insert(Pair(priority, value));
+        maxValuesMaxHeap.setBrotherIndex(indexMaxHeap, indexMinHeap);
+        maxValuesMinHeap.setBrotherIndex(indexMinHeap, indexMaxHeap);
+
         if(size % 2 == 1)
         {
-            Pair temp = maxValuesMinHeap.DeleteMin();
+            Pair temp = maxValuesMinHeap.DeleteMin(maxValuesMaxHeap);
 
-            maxValuesMaxHeap.Delete(temp);
-            minValuesMaxHeap.Insert(temp);
-            minValuesMinHeap.Insert(temp);
+            maxValuesMaxHeap.Delete(temp.getBrothersIndex(), maxValuesMinHeap);
+            int maxIndex = minValuesMaxHeap.Insert(temp);
+            int minIndex = minValuesMinHeap.Insert(temp);
+            minValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
+            minValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
         }
     }
     else
     {
-        minValuesMaxHeap.Insert(Pair(priority, value));
-        minValuesMinHeap.Insert(Pair(priority, value));
+        int indexMaxHeap = minValuesMaxHeap.Insert(Pair(priority, value));
+        int indexMinHeap = minValuesMinHeap.Insert(Pair(priority, value));
+        minValuesMaxHeap.setBrotherIndex(indexMaxHeap, indexMinHeap);
+        minValuesMinHeap.setBrotherIndex(indexMinHeap, indexMaxHeap);
         if(size % 2 == 0)
         {
-            Pair temp = minValuesMaxHeap.DeleteMax();
-            minValuesMinHeap.Delete(temp);
-            maxValuesMaxHeap.Insert(temp);
-            maxValuesMinHeap.Insert(temp);
+            Pair temp = minValuesMaxHeap.DeleteMax(minValuesMinHeap);
+            minValuesMinHeap.Delete(temp.getBrothersIndex(), minValuesMaxHeap);
+            int maxIndex = maxValuesMaxHeap.Insert(temp);
+            int minIndex = maxValuesMinHeap.Insert(temp);
+            maxValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
+            maxValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
         }
     }
 }
 
 Pair MinMaxMedianHeap::DeleteMax()
 {
-    Pair max = maxValuesMaxHeap.DeleteMax();
+    Pair max = maxValuesMaxHeap.DeleteMax(minValuesMinHeap);
 
-    maxValuesMinHeap.Delete(max);
+    maxValuesMinHeap.Delete(max.getBrothersIndex(), maxValuesMaxHeap);
     size--;
     if(size % 2 == 0)
     {
-        Pair temp = minValuesMaxHeap.DeleteMax();
+        Pair temp = minValuesMaxHeap.DeleteMax(minValuesMinHeap);
 
-        minValuesMinHeap.Delete(temp);
-        maxValuesMaxHeap.Insert(temp);
-        maxValuesMinHeap.Insert(temp);
+        minValuesMinHeap.Delete(temp.getBrothersIndex(), minValuesMaxHeap);
+        int maxIndex = maxValuesMaxHeap.Insert(temp);
+        int minIndex = maxValuesMinHeap.Insert(temp);
+        maxValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
+        maxValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
     }
 
     return max;
@@ -71,17 +82,19 @@ Pair MinMaxMedianHeap::DeleteMax()
 
 Pair MinMaxMedianHeap::DeleteMin()
 {
-    Pair min = minValuesMinHeap.DeleteMin();
+    Pair min = minValuesMinHeap.DeleteMin(minValuesMaxHeap);
 
-    minValuesMaxHeap.Delete(min);
+    minValuesMaxHeap.Delete(min.getBrothersIndex(), minValuesMinHeap);
     size--;
     if(size % 2 == 1)
     {
-        Pair temp = maxValuesMinHeap.DeleteMin();
+        Pair temp = maxValuesMinHeap.DeleteMin(minValuesMaxHeap);
 
-        maxValuesMaxHeap.Delete(temp);
-        minValuesMaxHeap.Insert(temp);
-        minValuesMinHeap.Insert(temp);
+        maxValuesMaxHeap.Delete(temp.getBrothersIndex(), maxValuesMinHeap§);
+        int maxIndex = minValuesMaxHeap.Insert(temp);
+        int minIndex = minValuesMinHeap.Insert(temp);
+        minValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
+        minValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
     }
 
     return min;

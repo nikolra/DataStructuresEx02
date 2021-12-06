@@ -19,3 +19,11 @@ void Pair::setData(const string &data) {
 Pair::Pair(int priority, const string &data) : priority(priority), data(data) {}
 
 Pair::Pair() {}
+
+int Pair::getBrothersIndex() const {
+    return brothersIndex;
+}
+
+void Pair::setBrothersIndex(int brothersIndex) {
+    Pair::brothersIndex = brothersIndex;
+}

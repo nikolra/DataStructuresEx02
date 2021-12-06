@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Heap.cpp
-Heap.h
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Heap.h
-
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Heap.h
 Pair.h
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Pair.h
@@ -22,19 +18,11 @@ exception
 string
 -
 
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MaxHeap.cpp
-MaxHeap.h
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MaxHeap.h
-
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MaxHeap.h
 Pair.h
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Pair.h
 Heap.h
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Heap.h
-
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MinHeap.cpp
-MinHeap.h
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MinHeap.h
 
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MinHeap.h
 Heap.h
@@ -52,17 +40,7 @@ MaxHeap.h
 MinHeap.h
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MinHeap.h
 
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Pair.cpp
-Pair.h
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Pair.h
-
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Pair.h
 iostream
 /Users/nikolrafalovich/CLionProjects/DataStructuresEx02/iostream
-
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/main.cpp
-iostream
--
-MinMaxMedianHeap.h
-/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/MinMaxMedianHeap.h
 

@@ -10,10 +10,10 @@ class Pair {
 private:
     int priority;
     string data;
+    int brothersIndex;
 
 public:
     Pair(int priority, const string &data);
-
     Pair();
 
     int getPriority() const;
@@ -21,6 +21,9 @@ public:
     const string &getData() const;
     void setData(const string &mData);
 
+    int getBrothersIndex() const;
+
+    void setBrothersIndex(int brothersIndex);
 };
 
 

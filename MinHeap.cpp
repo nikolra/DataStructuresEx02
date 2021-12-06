@@ -1,6 +1,6 @@
 #include "MinHeap.h"
 
-void MinHeap::FixHeap(int node)
+void MinHeap::FixHeap(int node, Heap& otherHeap)
 {
     int min;
     int left = Left(node);
@@ -16,8 +16,8 @@ void MinHeap::FixHeap(int node)
 
     if(min != node)
     {
-        Swap(data[node], data[min]);
-        FixHeap(min);
+        Swap(node, min, otherHeap);
+        FixHeap(min, otherHeap);
     }
 }
 
@@ -26,18 +26,18 @@ Pair MinHeap::Min()
     return data[0];
 }
 
-Pair MinHeap::DeleteMin()
+Pair MinHeap::DeleteMin(Heap& otherHeap)
 {
     if(heapSize < 1)
         throw new HeapException("no nodes in the heap");
     Pair min = data[0];
     heapSize--;
     data[0] = data[heapSize];
-    FixHeap(0);
+    FixHeap(0, otherHeap);
     return min;
 }
 
-void MinHeap::Insert(Pair item)
+int MinHeap::Insert(Pair item)
 {
     if(heapSize == maxSize)
         throw new HeapException("no more space in the heap");
@@ -50,16 +50,18 @@ void MinHeap::Insert(Pair item)
     }
 
     data[i] = item;
+
+    return i;
 }
 
-void MinHeap::FixHeapUp(int node)
+void MinHeap::FixHeapUp(int node, Heap& otherHeap)
 {//I am bigger than my parent
 
     int parent = Parent(node);
 
     while(node != 0 && data[node].getPriority() < data [parent].getPriority())
     {
-        Swap(data[node], data[parent]);
+        Swap(node, parent, otherHeap);
         node = parent;
         parent = Parent(node);
     }

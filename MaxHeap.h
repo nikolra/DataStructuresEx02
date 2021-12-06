@@ -10,10 +10,10 @@ class MaxHeap : public Heap{
 public:
     MaxHeap(int size) :Heap(size){}
     Pair Max();
-    Pair DeleteMax();
-    void FixHeap(int node) override;
-    void FixHeapUp(int node) override;
-    void Insert(Pair item) override;
+    Pair DeleteMax(Heap& otherHeap);
+    void FixHeap(int node, Heap& otherHeap) override;
+    void FixHeapUp(int node, Heap& otherHeap) override;
+    int Insert(Pair item) override;
 
 };
 #endif DATASTRUCTURESEX02_MAXHEAP_H

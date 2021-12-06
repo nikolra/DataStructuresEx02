@@ -15,19 +15,17 @@ protected:
     int Left(int node);
     int Right(int node);
     int Parent(int node);
-    virtual void FixHeap(int node) = 0;
-    virtual void FixHeapUp(int node) = 0;
-    void Swap(Pair &p1, Pair &p2);
+    virtual void FixHeap(int node, Heap& otherHeap) = 0;
+    virtual void FixHeapUp(int node, Heap& otherHeap) = 0;
+    void Swap(int i1, int i2, Heap& otherHeap);
     int FindMax(int n1, int n2, int n3);
-    Pair Delete(int node);
 
 public:
     Heap(int max);
-    Heap(Pair Arr[], int n);
     ~Heap();
-    virtual void Insert(Pair item) = 0;
-    Pair Delete(Pair pair);
-
+    virtual int Insert(Pair item) = 0;
+    Pair Delete(int node, Heap& otherHeap);
+    void setBrotherIndex(int myIndex, int brotherIndex);
     int getHeapSize() const;
 };
 
