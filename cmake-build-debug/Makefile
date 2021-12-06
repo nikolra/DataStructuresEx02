@@ -129,6 +129,30 @@ DataStructuresEx02/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresEx02.dir/build.make CMakeFiles/DataStructuresEx02.dir/build
 .PHONY : DataStructuresEx02/fast
 
+AppUI.o: AppUI.cpp.o
+.PHONY : AppUI.o
+
+# target to build an object file
+AppUI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresEx02.dir/build.make CMakeFiles/DataStructuresEx02.dir/AppUI.cpp.o
+.PHONY : AppUI.cpp.o
+
+AppUI.i: AppUI.cpp.i
+.PHONY : AppUI.i
+
+# target to preprocess a source file
+AppUI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresEx02.dir/build.make CMakeFiles/DataStructuresEx02.dir/AppUI.cpp.i
+.PHONY : AppUI.cpp.i
+
+AppUI.s: AppUI.cpp.s
+.PHONY : AppUI.s
+
+# target to generate assembly for a file
+AppUI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DataStructuresEx02.dir/build.make CMakeFiles/DataStructuresEx02.dir/AppUI.cpp.s
+.PHONY : AppUI.cpp.s
+
 Heap.o: Heap.cpp.o
 .PHONY : Heap.o
 
@@ -306,6 +330,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DataStructuresEx02"
+	@echo "... AppUI.o"
+	@echo "... AppUI.i"
+	@echo "... AppUI.s"
 	@echo "... Heap.o"
 	@echo "... Heap.i"
 	@echo "... Heap.s"

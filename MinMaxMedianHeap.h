@@ -18,7 +18,7 @@ private:
     int size;
 
 public:
-    MinMaxMedianHeap(int size);
+    MinMaxMedianHeap(int size );
     Pair Max();
     Pair DeleteMax();
     Pair Min();

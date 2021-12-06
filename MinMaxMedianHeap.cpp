@@ -26,8 +26,8 @@ void MinMaxMedianHeap::Insert(int priority, string value)
     size++;
     if( priority > minValuesMaxHeap.Max().getPriority())
     {
-        int indexMaxHeap = maxValuesMaxHeap.Insert(Pair(priority, value));
-        int indexMinHeap = maxValuesMinHeap.Insert(Pair(priority, value));
+        int indexMaxHeap = maxValuesMaxHeap.Insert(Pair(priority, value), maxValuesMinHeap);
+        int indexMinHeap = maxValuesMinHeap.Insert(Pair(priority, value), maxValuesMaxHeap);
         maxValuesMaxHeap.setBrotherIndex(indexMaxHeap, indexMinHeap);
         maxValuesMinHeap.setBrotherIndex(indexMinHeap, indexMaxHeap);
 
@@ -36,24 +36,24 @@ void MinMaxMedianHeap::Insert(int priority, string value)
             Pair temp = maxValuesMinHeap.DeleteMin(maxValuesMaxHeap);
 
             maxValuesMaxHeap.Delete(temp.getBrothersIndex(), maxValuesMinHeap);
-            int maxIndex = minValuesMaxHeap.Insert(temp);
-            int minIndex = minValuesMinHeap.Insert(temp);
+            int maxIndex = minValuesMaxHeap.Insert(temp, minValuesMinHeap);
+            int minIndex = minValuesMinHeap.Insert(temp, minValuesMaxHeap);
             minValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
             minValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
         }
     }
     else
     {
-        int indexMaxHeap = minValuesMaxHeap.Insert(Pair(priority, value));
-        int indexMinHeap = minValuesMinHeap.Insert(Pair(priority, value));
+        int indexMaxHeap = minValuesMaxHeap.Insert(Pair(priority, value), minValuesMinHeap);
+        int indexMinHeap = minValuesMinHeap.Insert(Pair(priority, value), minValuesMaxHeap);
         minValuesMaxHeap.setBrotherIndex(indexMaxHeap, indexMinHeap);
         minValuesMinHeap.setBrotherIndex(indexMinHeap, indexMaxHeap);
         if(size % 2 == 0)
         {
             Pair temp = minValuesMaxHeap.DeleteMax(minValuesMinHeap);
             minValuesMinHeap.Delete(temp.getBrothersIndex(), minValuesMaxHeap);
-            int maxIndex = maxValuesMaxHeap.Insert(temp);
-            int minIndex = maxValuesMinHeap.Insert(temp);
+            int maxIndex = maxValuesMaxHeap.Insert(temp, maxValuesMinHeap);
+            int minIndex = maxValuesMinHeap.Insert(temp, maxValuesMaxHeap);
             maxValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
             maxValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
         }
@@ -71,8 +71,8 @@ Pair MinMaxMedianHeap::DeleteMax()
         Pair temp = minValuesMaxHeap.DeleteMax(minValuesMinHeap);
 
         minValuesMinHeap.Delete(temp.getBrothersIndex(), minValuesMaxHeap);
-        int maxIndex = maxValuesMaxHeap.Insert(temp);
-        int minIndex = maxValuesMinHeap.Insert(temp);
+        int maxIndex = maxValuesMaxHeap.Insert(temp, maxValuesMinHeap);
+        int minIndex = maxValuesMinHeap.Insert(temp, maxValuesMaxHeap);
         maxValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
         maxValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
     }
@@ -90,9 +90,9 @@ Pair MinMaxMedianHeap::DeleteMin()
     {
         Pair temp = maxValuesMinHeap.DeleteMin(minValuesMaxHeap);
 
-        maxValuesMaxHeap.Delete(temp.getBrothersIndex(), maxValuesMinHeap§);
-        int maxIndex = minValuesMaxHeap.Insert(temp);
-        int minIndex = minValuesMinHeap.Insert(temp);
+        maxValuesMaxHeap.Delete(temp.getBrothersIndex(), maxValuesMinHeap);
+        int maxIndex = minValuesMaxHeap.Insert(temp, minValuesMinHeap);
+        int minIndex = minValuesMinHeap.Insert(temp, minValuesMaxHeap);
         minValuesMaxHeap.setBrotherIndex(maxIndex, minIndex);
         minValuesMinHeap.setBrotherIndex(minIndex, maxIndex);
     }

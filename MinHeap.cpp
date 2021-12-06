@@ -37,7 +37,7 @@ Pair MinHeap::DeleteMin(Heap& otherHeap)
     return min;
 }
 
-int MinHeap::Insert(Pair item)
+int MinHeap::Insert(Pair item, Heap& otherHeap)
 {
     if(heapSize == maxSize)
         throw new HeapException("no more space in the heap");
@@ -45,7 +45,10 @@ int MinHeap::Insert(Pair item)
     heapSize++;
     while( ( i > 0 ) && (data[Parent(i)].getPriority() > item.getPriority()))
     {
-        data[i] = data[Parent((i))];
+        data[i] = data[Parent(i)];
+        int brother = data[Parent(i)].getBrothersIndex();
+        MaxHeap& heap =  dynamic_cast<MaxHeap&>(otherHeap);
+        heap.data[brother].setBrothersIndex(i);
         i = Parent(i);
     }
 

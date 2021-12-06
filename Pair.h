@@ -20,10 +20,12 @@ public:
     void setPriority(int priority);
     const string &getData() const;
     void setData(const string &mData);
-
     int getBrothersIndex() const;
-
     void setBrothersIndex(int brothersIndex);
+
+    friend ostream& operator<<(ostream& out, const Pair& p)  {
+        return out << p.priority << " " << p.data;
+    }
 };
 
 

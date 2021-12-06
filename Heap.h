@@ -6,10 +6,10 @@
 class Heap {
 
 protected:
-    Pair* data;
     int maxSize;
     int heapSize;
     bool isAllocated;
+    Pair* data;
 
 protected:
     int Left(int node);
@@ -23,7 +23,7 @@ protected:
 public:
     Heap(int max);
     ~Heap();
-    virtual int Insert(Pair item) = 0;
+    virtual int Insert(Pair item, Heap& otherHeap) = 0;
     Pair Delete(int node, Heap& otherHeap);
     void setBrotherIndex(int myIndex, int brotherIndex);
     int getHeapSize() const;

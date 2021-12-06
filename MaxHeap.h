@@ -4,7 +4,7 @@
 
 #include "Pair.h"
 #include "Heap.h"
-
+#include "MinHeap.h"
 class MaxHeap : public Heap{
 
 public:
@@ -13,7 +13,9 @@ public:
     Pair DeleteMax(Heap& otherHeap);
     void FixHeap(int node, Heap& otherHeap) override;
     void FixHeapUp(int node, Heap& otherHeap) override;
-    int Insert(Pair item) override;
+    int Insert(Pair item, Heap& otherHeap) override;
+
+    friend class MinHeap;
 
 };
 #endif DATASTRUCTURESEX02_MAXHEAP_H

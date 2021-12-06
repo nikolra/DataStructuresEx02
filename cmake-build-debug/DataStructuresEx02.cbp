@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/AppUI.cpp">
+			<Option target="DataStructuresEx02"/>
+		</Unit>
+		<Unit filename="/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/AppUI.h">
+			<Option target="DataStructuresEx02"/>
+		</Unit>
 		<Unit filename="/Users/nikolrafalovich/CLionProjects/DataStructuresEx02/Heap.cpp">
 			<Option target="DataStructuresEx02"/>
 		</Unit>
